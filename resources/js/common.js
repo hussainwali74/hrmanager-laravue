@@ -13,7 +13,8 @@ export default {
               return await axios({
                     method: method,
                     url: url,
-                    data: dataObj
+                    data: dataObj,
+
                 });
 
             }catch(e){

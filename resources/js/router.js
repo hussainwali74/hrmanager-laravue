@@ -2,13 +2,9 @@
 
 import Vue from 'vue';
 import Router from 'vue-router';
-import myfirstcomponent from "./Component/pages/myfirstcomponent";
-import mysecondcomponent from "./Component/pages/mysecondcomponent";
-import hooks from "./Component/basics/hooks";
-import methods from "./Component/basics/methods";
-import home from "./Component/home";
-import tag from "./admin/pages/tag";
-import category from "./admin/pages/category";
+import vacations from "./admin/pages/vacations";
+import employees from "./admin/pages/employees";
+import login from "./admin/pages/login";
 
 
 
@@ -16,42 +12,19 @@ Vue.use(Router)
 
 
 const routes=[
-    //projects  routes
-
     {
-       path:'/',
-        component:home
+        path:'/employees',
+        component:employees
     },
     {
-        path:'/tag',
-        component:tag
+        path:'/vacations',
+        component:vacations
     },
     {
-        path:'/category',
-        component:category
+        path:'/login',
+        component:login
     },
 
-
-
-
-
-    //tutorial routes
-    {
-        path:'/my-vue-router',
-        component:myfirstcomponent
-    },
-    {
-        path:'/second-route',
-        component:  mysecondcomponent
-    },
-    {
-        path:'/hooks',
-        component: hooks
-    },
-    {
-        path:'/methods',
-        component: methods
-    }
 ]
 
 export default new Router({

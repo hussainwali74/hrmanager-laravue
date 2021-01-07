@@ -11,14 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/new', 'TestController@welcome');
-Route::any('{slug}',function (){
-    return view('welcome');
-});
 Route::post('/app/addTag', 'AdminController@addTag');
 Route::post('/app/editTag', 'AdminController@editTag');
 Route::post('/app/deleteTag', 'AdminController@deleteTag');
@@ -26,7 +18,19 @@ Route::post('/app/upload', 'AdminController@upload');
 Route::post('/app/deleteImage', 'AdminController@deleteImage');
 Route::get('/app/getTag', 'AdminController@getTag');
 
-Route::post('/app/addCategory', 'AdminController@addCategory');
 Route::get('/app/getCategory', 'AdminController@getCategory');
-Route::post('/app/deleteCategory', 'AdminController@deleteCategory');
-Route::post('/app/editCategory', 'AdminController@editCategory');
+
+//employees
+Route::post('/app/addEmployee', 'AdminController@addEmployee');
+Route::get('/app/getEmployees', 'AdminController@getEmployees');
+Route::post('/app/deleteEmployee', 'AdminController@deleteEmployee');
+Route::post('/app/editEmployee', 'AdminController@editEmployee');
+
+//Login
+
+Route::post('/app/login', 'AdminController@adminLogin');
+Route::post('/app/addVacation', 'AdminController@addVacation');
+
+Route::get('/logout', 'AdminController@logout');
+Route::get('/', 'AdminController@index');
+Route::any('{slug}', 'AdminController@index');
