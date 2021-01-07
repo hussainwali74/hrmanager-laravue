@@ -28,7 +28,6 @@ set('ssh_multiplexing', true); // Speed up deployment
 set('rsync_src', function () {
     return __DIR__; // If your project isn't in the root, you'll need to change this.
 });
-
 // Configuring the rsync exclusions.
 // You'll want to exclude anything that you don't want on the production server.
 add('rsync', [
