@@ -54,7 +54,7 @@ host('hrmanager.ioptime.com') // Name of the server
     ->hostname('hrmanager.ioptime.com') // Hostname or IP address
     ->stage('production') // Deployment stage (production, staging, etc)
     ->user('deploy') // SSH user
-    ->set('deploy_path', '/public_html/hrmanager'); // Deploy path
+    ->set('deploy_path', '/public_html/hrmanagerbackend'); // Deploy path
 
 
 after('deploy:failed', 'deploy:unlock'); // Unlock after failed deploy
