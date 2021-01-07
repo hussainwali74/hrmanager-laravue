@@ -235,10 +235,8 @@
                         }
                     }else{
                         this.swr();
-
                     }
                 }
-
             },
 
             showEditModel(category,i){
