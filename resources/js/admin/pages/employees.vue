@@ -25,7 +25,7 @@
                                 <td>{{employee.contact}}</td>
                                 <td>
                                     <Button type="info" @click="showEditModel(employee,i)" size="small">Edit</Button>
-                                    <Button type="error" size="small" 
+                                    <Button type="error" size="small"
                                     @click="showDeleteModel(employee,i)" :loading="employee.isDeleting">Delete</Button>
                                 </td>
                             </tr>
@@ -70,7 +70,6 @@
                     <div class="space">
                         <Input type="hidden" v-model="editModel.id" placeholder="Full Name" />
                     </div>
-                    
                     <div class="space">
                         <Input v-model="editModel.fullName" placeholder="Full Name" />
                     </div>
@@ -85,7 +84,7 @@
                     </div>
                     <div class="space">
                         <Input v-model="editModel.job_title" placeholder="Job Title" />
-                    </div> 
+                    </div>
                     <div slot="footer">
                         <Button type="default" @click="editModel=false">Cancel</Button>
                         <Button type="primary" @click="editEmployee()" :disabled="isAdding" :loading="isAdding">
@@ -174,7 +173,7 @@
                     }else{
                         this.swr();
                     }
-                }   
+                }
                 this.isAdding=false
             }, //end ASYNC ADDMPLOYEE
 

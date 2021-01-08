@@ -2,15 +2,11 @@
     <div>
         <div class="content">
             <div class="container">
-
                 <!--~~~~~~~ TABLE ONE ~~~~~~~~~-->
                 <div class="_1adminOverveiw_table_recent _box_shadow _border_radious _mar_b30 _p20">
                     <p class="_title0">Category
-                          <Button type="default" @click="addModel=true"><Icon type="ios-add" /> Add category</Button>
-
-
+                        <Button type="default" @click="addModel=true"><Icon type="ios-add" /> Add category</Button>
                     </p>
-
                     <div class="_overflow _table_div">
                         <table class="_table">
                             <!-- TABLE TITLE -->
@@ -23,7 +19,6 @@
                             </tr>
                             <!-- TABLE TITLE -->
 
-
                             <!-- ITEMS -->
                             <tr  v-for="(category,i) in categories" :key="i" v-if="categories.length">
                                 <td>{{category.id}}</td>
@@ -33,17 +28,11 @@
                                 <td><img style="width:20%" class="img-fluid img-thumbnail" :src="`/img/${category.iconImage}`" ></td>
                                 <td>{{category.created_at}}</td>
                                 <td>
-
                                     <Button type="info" @click="showEditModel(category,i)" size="small">Edit</Button>
                                     <Button type="error" size="small" @click="showDeleteModel(category,i)" :loading="category.isDeleting">Delete</Button>
                                 </td>
                             </tr>
                             <!-- ITEMS -->
-
-                            <!-- ITEMS -->
-
-                            <!-- ITEMS -->
-
 
                         </table>
                     </div>
@@ -88,7 +77,7 @@
                     </div>
                 </Modal>
 
-<!--                Edit model-->
+                <!--     Edit model-->
                 <Modal
                     v-model="editModel"
                     title="Edit Tag"
@@ -128,7 +117,7 @@
                     </div>
                 </Modal>
 
-<!--                   delete alert model-->
+                <!--delete alert model-->
 
                 <Modal v-model="deleteModel" width="360">
                     <p slot="header" style="color:#f60;text-align:center">
@@ -137,21 +126,17 @@
                     </p>
                     <div style="text-align:center">
                         <p>Are you sure you want to delete tag.</p>
-
                     </div>
                     <div slot="footer">
                         <Button type="error" size="large" long :loading="isDeleting" :disabled="isDeleting" @click="deleteCategory()">Delete</Button>
                     </div>
                 </Modal>
-
             </div>
         </div>
     </div>
 
 
 <!--    Add tag model-->
-
-
 
 </template>
 
@@ -178,39 +163,37 @@
               index:-1,
               deleteModel:false,
               deleteItem : {
-
               },
               deleteIndex:-1,
               isDeleting : false,
               token : ''
-
           }
         },
 
         methods:{
-                     async addCategory(){
+            async addCategory(){
 
-                          if(this.data.categoryName.trim()=='') return this.e('Category name is required !')
+                if(this.data.categoryName.trim()=='') return this.e('Category name is required !')
 
-                          const  res = await this.callApi('post','app/addCategory',this.data)
-                          if(res.status===201){
-                             this.categories.unshift(res.data)
-                             this.s('Category added successfully!');
-                             this.addModel=false
-                             this.data.categoryName=''
-                             this.data.iconImage=''
-                          }else{
-                             if(res.status==422){
-                                 if(res.data.errors.categoryName){
-                                       this.e(res.data.errors.categoryName[0])
-                                 }
-                             }else{
-                                 this.swr();
+                const  res = await this.callApi('post','app/addCategory',this.data)
+                if(res.status===201){
+                    this.categories.unshift(res.data)
+                    this.s('Category added successfully!');
+                    this.addModel=false
+                    this.data.categoryName=''
+                    this.data.iconImage=''
+                }else{
+                    if(res.status==422){
+                        if(res.data.errors.categoryName){
+                            this.e(res.data.errors.categoryName[0])
+                        }
+                    }else{
+                        this.swr();
 
-                             }
-                         }
+                    }
+                }
 
-                      },
+            },
 
                      async editCategory(){
 

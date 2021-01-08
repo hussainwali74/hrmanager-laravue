@@ -6,7 +6,6 @@ import Vuex from 'vuex';
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-
     state :{
         counter : 1000,
         user:false
@@ -15,7 +14,6 @@ export default new Vuex.Store({
         getCounter(state){
             return state;
         },
-      
     },
     mutations:{
         changeTheCounter(state,data){
@@ -25,14 +23,12 @@ export default new Vuex.Store({
         updateUser(state,user){
            state.user=user
         }
-
     },
     actions:{
         changeCounterAction({commit},data){
             commit('changeTheCounter',data)
         }
     }
-
 })
 
 

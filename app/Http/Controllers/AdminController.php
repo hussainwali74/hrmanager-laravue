@@ -40,7 +40,6 @@ class AdminController extends Controller
                 return view('welcome');
             }else{
                 return redirect('/vacations');
-
             }
         }
 
@@ -52,7 +51,7 @@ class AdminController extends Controller
             }
         }
         return view('welcome');
-    }
+    } //end INDEX function
 
     public function logout(){
         Auth::logout();
@@ -118,7 +117,7 @@ class AdminController extends Controller
             'password' => 'bail|required'
         ]);
         if(Auth::attempt(['email'=>$request->email,'password'=>$request->password])){
-            return response()->json(['msg'=>'You are logged in']);
+            return response()->json(['msg'=>'You are logged in','user'=>Auth::user()]);
         }else{
             return response()->json(['msg'=>'Incorrect Login Details'],401);
         }

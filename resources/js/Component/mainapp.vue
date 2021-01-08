@@ -4,8 +4,8 @@
             <!--========== ADMIN SIDE MENU one ========-->
             <div class="_1side_menu"  >
                 <div class="_1side_menu_logo">
-                    <h3 style="text-align:center;">Hr</h3>
-                    <!--<img src="/img/logo.jpg" style="width: 108px;margin-left: 68px;"/>-->
+                    <!-- <h3 style="text-align:center;">Hr</h3> -->
+                    <img src="/img/logo.png" style="width: 50px;"/>
                 </div>
 
                 <!--~~~~~~~~ MENU CONTENT ~~~~~~~~-->
@@ -57,7 +57,6 @@
         data(){
             return {
                 isLoggedIn : false,
-
             }
         },
 

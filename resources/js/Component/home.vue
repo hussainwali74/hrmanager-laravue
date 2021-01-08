@@ -70,7 +70,6 @@
                             </tr>
                             <!-- TABLE TITLE -->
 
-
                             <!-- ITEMS -->
                             <tr>
                                 <td>25-05-19</td>
@@ -86,7 +85,6 @@
                             </tr>
                             <!-- ITEMS -->
 
-                            <!-- ITEMS -->
                             <tr>
                                 <td>25-05-19</td>
                                 <td class="_table_name">Are Trump era is having an impact on what 's future voters</td>

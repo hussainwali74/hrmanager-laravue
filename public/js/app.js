@@ -2117,7 +2117,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2559,13 +2558,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "login",
   data: function data() {
@@ -2621,7 +2613,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 if (res.status === 200) {
                   _this.s(res.data.msg);
 
-                  window.location = '/';
+                  window.location = '/'; // this.$router.push('/');
+                  // console.log(res)
+                  // this.$router.push('/'); //DOESN'T REFRESH THE WINDOW
                 } else if (res.status === 401) {
                   _this.i(res.data.msg);
                 } else if (res.status === 422) {
@@ -67805,7 +67799,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "_1side_menu_logo" }, [
-      _c("h3", { staticStyle: { "text-align": "center" } }, [_vm._v("Hr")])
+      _c("img", {
+        staticStyle: { width: "50px" },
+        attrs: { src: "/img/logo.png" }
+      })
     ])
   },
   function() {
