@@ -27,9 +27,11 @@ Route::post('/app/deleteEmployee', 'AdminController@deleteEmployee');
 Route::post('/app/editEmployee', 'AdminController@editEmployee');
 
 //Login
-
 Route::post('/app/login', 'AdminController@adminLogin');
+Route::post('/app/resetPassword', 'AdminController@resetPassword');
+
 Route::post('/app/addVacation', 'AdminController@addVacation');
+Route::get('/app/getEmployeeVacations', 'AdminController@getEmployeeVacations');
 
 Route::get('/logout', 'AdminController@logout');
 Route::get('/', 'AdminController@index');

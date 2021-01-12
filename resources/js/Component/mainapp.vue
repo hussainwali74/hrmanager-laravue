@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="$store.state.user">
+        <div v-if="$store.state.user" >
             <!--========== ADMIN SIDE MENU one ========-->
             <div class="_1side_menu"  >
                 <div class="_1side_menu_logo">
@@ -12,14 +12,26 @@
                 <div class="_1side_menu_content" >
                     <div class="_1side_menu_img_name">
                         <!-- <img class="_1side_menu_img" src="/pic.png" alt="" title=""> -->
-                        <p class="_1side_menu_name">Admin</p>
+                        <p class="_1side_menu_name">{{$store.state.user.fullName.toUpperCase()}}</p>
                     </div>
 
                     <!--~~~ MENU LIST ~~~~~~-->
                     <div class="_1side_menu_list">
                         <ul class="_1side_menu_list_ul">
-                            <li v-if="$store.state.user.userType=='admin'"><router-link to="employees"><Icon type="ios-speedometer" /> Employees</router-link></li>
-                            <li v-if="$store.state.user.userType=='employee'"><router-link to="vacations"><Icon type="ios-speedometer" /> Vacations</router-link></li>
+                            <li v-if="$store.state.user.userType=='admin'">
+                                <router-link to="employees"><Icon type="ios-speedometer" /> Employees</router-link></li>
+                            <li v-if="$store.state.user.userType=='employee'">
+                                <router-link to="myvacationslist"><Icon type="ios-speedometer" />My Vacations</router-link>
+                            </li>
+                            <li v-if="$store.state.user.userType=='employee'">
+                                <router-link to="addvacation"><Icon type="ios-speedometer" /> Add Vacation</router-link>
+                            </li>
+                            <li v-if="$store.state.user.userType=='employee'">
+                                <router-link to="password-reset">
+                                    <Icon type="ios-speedometer" />
+                                    Password Reset
+                                </router-link>
+                            </li>
                             <li><a href="/logout"><Icon type="ios-speedometer" /> Logout</a></li>
 
                         </ul>
@@ -29,12 +41,15 @@
             <!--========== ADMIN SIDE MENU ========-->
 
             <!--========= HEADER ==========-->
-            <div class="header">
+            <div v-if="$store.state.user.userType=='employee'" class="header">
                 <div class="_2menu _box_shadow">
                     <div class="_2menu_logo">
                         <ul class="open_button">
-                            <li>
+                            <li >
+                                <router-link to="/myvacationslist"
+                                >
                                 <Icon type="ios-list" />
+                                </router-link>
                             </li>
                             <!--<li><Icon type="ios-albums" /></li>-->
                         </ul>
@@ -62,6 +77,7 @@
 
         created(){
             this.$store.commit('updateUser',this.user)
+            // this.$store.commit('theme','dark')
         }
     }
 </script>
