@@ -7,11 +7,16 @@ import login from "./admin/pages/login";
 import passwordReset from "./admin/pages/passwordReset";
 import vacationsList from './admin/pages/vacationsList';
 import addVacation from './admin/pages/addVacation';
-
+import Vacations from './admin/pages/vacations';
 Vue.use(Router)
 
 
 const routes = [
+    // {
+    //     path: '',
+    //     redirect: '/myvacationslist'
+    // },
+
     {
         path: '/employees',
         component: employees
@@ -20,10 +25,10 @@ const routes = [
         path: '/addvacation',
         component: addVacation,
     },
-    {
-        path: '/myvacationslist',
-        component: vacationsList
-    },
+    // {
+    //     path: '/myvacationslist',
+    //     component: vacationsList
+    // },
     {
         path: '/password-reset',
         component: passwordReset

@@ -528,6 +528,32 @@ textarea {
     padding: 13px 0 0 0px;
     border-left: 1px solid #ececec;
 }
+/* 
+CUSTOM CLASSES
+==========================================================================
+*/
+.pl-0 {
+    padding-left: 0;
+}
+.pl-1 {
+    padding-left: 0.5rem;
+}
+.pl-2 {
+    padding-left: 1rem;
+}
+.pl-3 {
+    padding-left: 1.5rem;
+}
+.pl-4 {
+    padding-left: 2rem;
+}
+.pl-5 {
+    padding-left: 2.5rem;
+}
+/* 
+END CUSTOM CLASSES
+==========================================================================
+*/
 ._2menu_profile_pic {
     height: 35px;
     width: 35px;

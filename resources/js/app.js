@@ -2,12 +2,12 @@ require('./bootstrap');
 
 //load vue  to dom
 
-window.Vue=require('vue')
+window.Vue = require('vue')
 
-Vue.component('mainapp',require('./Component/mainapp').default)
+Vue.component('mainapp', require('./Component/mainapp').default)
 
 import VueProgressBar from 'vue-progressbar'
-
+import 'bootstrap';
 import ViewUI from 'view-design';
 import 'view-design/dist/styles/iview.css';
 // import locale from 'element-ui/lib/locale/lang/en'
@@ -35,8 +35,8 @@ Vue.mixin(common)
 Vue.use(ViewUI);
 Vue.use(VueProgressBar, options)
 
-const  app=new Vue({
-    el:'#app',
+const app = new Vue({
+    el: '#app',
     router,
     store
 })

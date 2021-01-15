@@ -20,13 +20,13 @@
                         <ul class="_1side_menu_list_ul">
                             <li v-if="$store.state.user.userType=='admin'">
                                 <router-link to="employees"><Icon type="ios-speedometer" /> Employees</router-link></li>
-                            <li v-if="$store.state.user.userType=='employee'">
+                            <!-- <li v-if="$store.state.user.userType=='employee'">
                                 <router-link to="myvacationslist"><Icon type="ios-speedometer" />My Vacations</router-link>
-                            </li>
+                            </li> -->
                             <li v-if="$store.state.user.userType=='employee'">
                                 <router-link to="addvacation"><Icon type="ios-speedometer" /> Add Vacation</router-link>
                             </li>
-                            <li v-if="$store.state.user.userType=='employee'">
+                            <li>
                                 <router-link to="password-reset">
                                     <Icon type="ios-speedometer" />
                                     Password Reset
@@ -41,7 +41,7 @@
             <!--========== ADMIN SIDE MENU ========-->
 
             <!--========= HEADER ==========-->
-            <div v-if="$store.state.user.userType=='employee'" class="header">
+            <!-- <div v-if="$store.state.user.userType=='employee'" class="header">
                 <div class="_2menu _box_shadow">
                     <div class="_2menu_logo">
                         <ul class="open_button">
@@ -51,11 +51,10 @@
                                 <Icon type="ios-list" />
                                 </router-link>
                             </li>
-                            <!--<li><Icon type="ios-albums" /></li>-->
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!--========= HEADER ==========-->
         </div>
         <RouterView></RouterView>

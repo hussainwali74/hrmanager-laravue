@@ -19,40 +19,33 @@ class AdminController extends Controller
         }
 
         if(!Auth::check() && $request->path()=="login"){
+            // dd('ddd');
             return view('welcome');
         }
 
         if($request->path()=='login'){
-            if(Auth::user()->userType=='employees'){
+            if(Auth::user()->userType=='admin'){
                 return redirect('/employees');
-            }else{
-                return redirect('/vacations');
             }
         }
 
         if(Auth::check() && $request->path()=='/'){
-            if(Auth::user()->userType=='employees'){
+            if(Auth::user()->userType=='admin'){
                 return redirect('/employees');
-            }else{
-                return redirect('/vacations');
             }
+            if(Auth::user()->userType=='employee'){
+                return redirect('/addvacation');
+            }
+
         }
 
         if(Auth::check() && $request->path()=='employees'){
             if(Auth::user()->userType=='admin'){
                 return view('welcome');
-            }else{
-                return redirect('/vacations');
             }
+
         }
 
-        if(Auth::check() && $request->path()=='vacations'){
-            if(Auth::user()->userType=='employee'){
-                return view('welcome');
-            }else{
-                return redirect('/employees');
-            }
-        }
         return view('welcome');
     } //end INDEX function
 
@@ -163,7 +156,6 @@ class AdminController extends Controller
     }
 
     function addVacation(request $request){
-        // dd($request->all);
         $this->validate($request, [
             'name'=>'required',
             'email' => 'bail|required|email',
@@ -186,8 +178,8 @@ class AdminController extends Controller
             $vacation->save();
         }
         $client = new \GuzzleHttp\Client();
-         $url = "https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8";
-        $request = $client->request('POST',$url,  [
+        $url = "https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8";
+        $finalData = [
             'form_params' => [
                 'name' => $request->name,
                 'email' => $request->email,
@@ -200,23 +192,11 @@ class AdminController extends Controller
                 'retURL'=>'',
                 'recordType'=>'0126F000001QWEI'
             ]
-        ]);
-        // $request = $client->post($url,  [
-        //     'name' => $request->name,
-        //     'email' => $request->email,
-        //     'description'=>$request->description,
-        //     'subject'=>'testing',
-        //     '00N6F00000Ykwb1'=>$request->startDate,
-        //     '00N6F00000Ykwb6'=>$request->endDate,
-        //     'type'=>$request->type,
-        //     'orgid'=>'00D6F000001osey',
-        //     'retURL'=>'',
-        //     'recordType'=>'0126F000001QWEI'
-        // ]);
-        // $response = $request->send();
-        // $code =  $request->getStatusCode();
+        ];
+        $salesForceResponse = $client->request('POST',$url,  $finalData);
+        $code =  $salesForceResponse->getStatusCode();
         if($code==200){
-            return response()->json('',200);
+            return response()->json($salesForceResponse,200);
         }else{
             return response()->json('',500);
         }

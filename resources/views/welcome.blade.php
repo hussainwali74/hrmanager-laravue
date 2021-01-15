@@ -13,13 +13,9 @@
 
         </script>
 
-        <title>Learning vue with laravel</title>
+        <title>HR | iOptime</title>
 
         <link rel="stylesheet" href="/css/all.css">
-
-
-
-        <!-- Fonts -->
 
     </head>
     <body>

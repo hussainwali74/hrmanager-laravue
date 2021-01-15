@@ -4,7 +4,13 @@
             <div class="container">
                 <!--~~~~~~~ TABLE ONE ~~~~~~~~~-->
                 <div class="_1adminOverveiw_table_recent _box_shadow _border_radious _mar_b30 _p20">
-                    <p class="_title0">Employee &nbsp;
+                    <p class="_title0">
+                            <Select @input="onChangeUserType($event)"
+                              class="space" style="40%" placeholder="type" v-model="data.type" id="type">
+                                <Option v-for="item in typeOptions" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                            </Select>
+                        <!-- Employee -->
+                         &nbsp;
                         <Button type="default" @click="addModel=true"><Icon type="ios-add" /> Add Employee</Button>
                     </p>
                     <div class="_overflow _table_div">
@@ -17,7 +23,7 @@
                                 <th>Job Title</th>
                                 <th>Action</th>
                             </tr>
-                            <tr  v-for="(employee,i) in employees" :key="i" v-if="employees.length">
+                            <tr  v-for="(employee,i) in userType" :key="i" v-if="userType.length">
                                 <td>{{employee.id}}</td>
                                 <td>{{employee.fullName}}</td>
                                 <td>{{employee.email}}</td>
@@ -64,26 +70,26 @@
                 <Modal
                     v-model="editModel"
                     title="Update Employee"
-                    :mask-closable = "false"
-                    :closable = "false"
+                    :mask-closable = "true"
+                    :closable = "true"
                 >
-                    <div class="space">
-                        <Input type="hidden" v-model="editModel.id" placeholder="Full Name" />
+                    <div class="space" style="display:none;">
+                        <Input v-model="editdata.id" />
                     </div>
                     <div class="space">
-                        <Input v-model="editModel.fullName" placeholder="Full Name" />
+                        <Input v-model="editdata.fullName" placeholder="Full Name" />
                     </div>
                     <div class="space">
-                        <Input v-model="editModel.email" type="email" placeholder="Email" />
+                        <Input v-model="editdata.email" type="email" placeholder="Email" />
                     </div>
                     <div class="space">
-                        <Input v-model="editModel.password" type="password" placeholder="Password" />
+                        <Input v-model="editdata.password" type="password" placeholder="Password" />
                     </div>
                     <div class="space">
-                        <Input v-model="editModel.contact"  placeholder="Contact" />
+                        <Input v-model="editdata.contact"  placeholder="Contact" />
                     </div>
                     <div class="space">
-                        <Input v-model="editModel.job_title" placeholder="Job Title" />
+                        <Input v-model="editdata.job_title" placeholder="Job Title" />
                     </div>
                     <div slot="footer">
                         <Button type="default" @click="editModel=false">Cancel</Button>
@@ -118,12 +124,17 @@
 
         data(){
           return {
+              typeOptions:[
+                { value: 'Employee', label:'Employee'},
+                { value: 'Admin', label:'Admin'},
+              ],
               data : {
                 fullName : '',
                 email : '',
                 password : '',
                 contact:'',
                 job_title:'',
+                type:'Employee',
               },
               addModel : false,
               editModel : false,
@@ -136,7 +147,7 @@
                 job_title:'',
               },
               isAdding :false,
-              employees:[],
+              userType:[],
               index:-1,
               deleteModel:false,
               deleteItem : {
@@ -149,15 +160,15 @@
 
         methods:{
             async addEmployee(){
-                this.isAdding=true
                 if(this.data.fullName.trim()=='') return this.e('Full name is required')
                 if(this.data.email.trim()=='') return this.e('Email is required')
                 if(this.data.password.trim()=='') return this.e('Password is required')
-                if(this.data.contact.trim()=='') return this.e('Contact is required')
-                if(!this.data.job_title) return this.e('Job Title  is required')
+                // if(this.data.contact.trim()=='') return this.e('Contact is required')
+                // if(!this.data.job_title) return this.e('Job Title  is required')
+                this.isAdding=true
                 const  res = await this.callApi('post','app/addEmployee',this.data)
                 if(res.status===201){
-                    this.employees.unshift(res.data)
+                    this.userType.unshift(res.data)
                     this.s('Employee added successfully!');
                     this.addModel=false
                     this.data.fullName=''
@@ -180,15 +191,16 @@
             async editEmployee(){
                 if(this.editdata.fullName.trim()=='') return this.e('Full name is required')
                 if(this.editdata.email.trim()=='') return this.e('Email is required')
-                if(this.editdata.contact.trim()=='') return this.e('Contact is required')
-                if(!this.editdata.job_title) return this.e('Job Title  is required')
+                // if(this.editdata.contact.trim()=='') return this.e('Contact is required')
+                // if(!this.editdata.job_title) return this.e('Job Title  is required')
+
                 const  res = await this.callApi('post','app/editEmployee',this.editdata)
                 if(res.status===200){
                       // add new category name in categories array
-                    this.employees[this.index].fullName=this.editdata.fullName
-                    this.employees[this.index].email=this.editdata.email
-                    this.employees[this.index].contact=this.editdata.contact
-                    this.employees[this.index].job_title=this.editdata.job_title
+                    this.userType[this.index].fullName=this.editdata.fullName
+                    this.userType[this.index].email=this.editdata.email
+                    this.userType[this.index].contact=this.editdata.contact
+                    this.userType[this.index].job_title=this.editdata.job_title
                     this.s('Category updated successfully!')
                     this.editModel=false
                 }else{
@@ -290,7 +302,13 @@
                     this.data.iconImage=img
                     this.swr()
                 }
-            } //end DELETEEDITIMAGE
+            }, //end DELETEEDITIMAGE
+
+            onChangeUserType:function(event){
+                alert(event)
+                // if(this.)
+                console.log(this.data.userType)
+            } //end ONCHANGEUSERTYPE
         },  //end METHODS
 
         async created(){
@@ -299,7 +317,7 @@
             const  res = await this.callApi('get','app/getEmployees')
             if(res.status===200){
                 console.log(res.data)
-                this.employees=res.data
+                this.userType=res.data
                 this.$Progress.finish()
             }else{
                 this.swr();
@@ -308,3 +326,8 @@
         } //end CREATED
     }
 </script>
+<style   scoped>
+    ._title0 .ivu-select {
+        width: 14%;
+    }
+</style>
