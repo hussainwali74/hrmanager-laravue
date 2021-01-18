@@ -20,9 +20,9 @@
                         <ul class="_1side_menu_list_ul">
                             <li v-if="$store.state.user.userType=='admin'">
                                 <router-link to="employees"><Icon type="ios-speedometer" /> Employees</router-link></li>
-                            <!-- <li v-if="$store.state.user.userType=='employee'">
-                                <router-link to="myvacationslist"><Icon type="ios-speedometer" />My Vacations</router-link>
-                            </li> -->
+                            <li v-if="$store.state.user.userType=='employee'">
+                                <router-link to="vacationslist"><Icon type="ios-speedometer" />My Vacations</router-link>
+                            </li>
                             <li v-if="$store.state.user.userType=='employee'">
                                 <router-link to="addvacation"><Icon type="ios-speedometer" /> Add Vacation</router-link>
                             </li>
@@ -63,7 +63,9 @@
     </div>
 
 </template>
+
 <script>
+    import sideMenu from './sidemenu';
     export default {
 
         props:['user'],
@@ -77,6 +79,7 @@
         created(){
             this.$store.commit('updateUser',this.user)
             // this.$store.commit('theme','dark')
-        }
+        },
+        components:{sideMenu}
     }
 </script>

@@ -26,6 +26,9 @@ Route::get('/app/getEmployees', 'AdminController@getEmployees');
 Route::post('/app/deleteEmployee', 'AdminController@deleteEmployee');
 Route::post('/app/editEmployee', 'AdminController@editEmployee');
 
+Route::get('/app/getSalesForce/{email}', 'AdminController@getSalesForce');
+Route::get('/app/salesForceResponse', 'AdminController@salesForceResponse');
+
 //Login
 Route::post('/app/login', 'AdminController@adminLogin');
 Route::post('/app/resetPassword', 'AdminController@resetPassword');

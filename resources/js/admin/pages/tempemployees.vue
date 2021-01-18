@@ -3,7 +3,8 @@
         <div class="content">
             <div class="container">
                 <!--~~~~~~~ TABLE ONE ~~~~~~~~~-->
-                <Card >
+                <!-- <div class="_1adminOverveiw_table_recent _box_shadow _border_radious _mar_b30 _p20"> -->
+                    <Card :theme="theme3">
                     <p class="_title0">
                             <Select @input="onChangeUserType($event)"
                               class="space" style="40%" v-model="type" id="type">
@@ -14,7 +15,16 @@
                         <Button type="default" @click="addModel=true"><Icon type="ios-add" /> Add Employee</Button>
                     </p>
                      <div class="_overflow _table_div">
-                        <table class="_table">
+                         <Table :theme="theme3" stripe :columns="columns1" :data="userType">
+
+                             <template slot-scope="{row,index}" slot="action">
+                                    <Button type="info" @click="showEditModel(row,index)" size="small">Edit</Button>
+                                    <Button type="error" size="small"
+                                        @click="showDeleteModel(row,index)" :loading="row.isDeleting">Delete</Button>
+
+                             </template>
+                         </Table>
+                        <!-- <table class="_table">
                             <tr>
                                 <th>Id</th>
                                 <th>Name</th>
@@ -35,11 +45,10 @@
                                     @click="showDeleteModel(employee,i)" :loading="employee.isDeleting">Delete</Button>
                                 </td>
                             </tr>
-                        </table>
+                        </table> -->
                     <!-- </div> -->
                     </div>
                 </Card>
-
                 <!--~~~~~~~ Create Employee ~~~~~~~~~-->
                 <Modal
                     v-model="addModel"
@@ -74,7 +83,6 @@
                         </Button>
                     </div>
                 </Modal>
-
                 <!--~~~~~~~ Edit Employee ~~~~~~~~~-->
                 <Modal
                     v-model="editModel"
@@ -137,6 +145,39 @@
     export default {
         data(){
           return {
+                theme3: 'dark',
+                columns1: [
+                    {
+                        type: 'index',
+                        width: 60,
+                        align: 'center'
+                    },
+                    {
+                        title: 'Name',
+                        key: 'fullName'
+                    },
+                    {
+                        title: 'Email',
+                        key: 'email'
+                    },
+                    {
+                        title: 'Contact',
+                        key: 'contact'
+                    },
+                    {
+                        title: 'Job Title',
+                        key: 'job_title'
+                    },
+                    {
+
+                        title: 'Action',
+                        slot: 'action',
+                        width: 150,
+                        align: 'center'
+
+                    },
+                ],
+                data1: [],
               typeOptions:[
                 { value: 'employee', label:'Employees'},
                 { value: 'admin', label:'Admins'},

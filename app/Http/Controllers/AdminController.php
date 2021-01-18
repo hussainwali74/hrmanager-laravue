@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
+use Illuminate\Support\Facades\Http;
 
 class AdminController extends Controller
 {
@@ -19,13 +20,14 @@ class AdminController extends Controller
         }
 
         if(!Auth::check() && $request->path()=="login"){
-            // dd('ddd');
             return view('welcome');
         }
 
         if($request->path()=='login'){
             if(Auth::user()->userType=='admin'){
                 return redirect('/employees');
+            }else if(Auth::user()->userType=='employee'){
+                return redirect('/');
             }
         }
 
@@ -36,14 +38,12 @@ class AdminController extends Controller
             if(Auth::user()->userType=='employee'){
                 return redirect('/addvacation');
             }
-
         }
 
         if(Auth::check() && $request->path()=='employees'){
             if(Auth::user()->userType=='admin'){
                 return view('welcome');
             }
-
         }
 
         return view('welcome');
@@ -52,6 +52,10 @@ class AdminController extends Controller
     public function logout(){
         Auth::logout();
         return redirect('/login');
+    }
+
+    function getEmployees(){
+        return User::where(['userType'=>'employee'])->orWhere(['userType'=>'admin'])->orderBy('id', 'desc')->get();
     }
 
     function addEmployee(request $request){
@@ -69,20 +73,13 @@ class AdminController extends Controller
             'password' => $password,
             'job_title' => $request->job_title,
             'contact' => $request->contact,
-            'userType'=>'employee'
+            'userType'=>$request->type
         ]);
         return $user;
     }
 
-    function getCategory(){
-        return Category::orderBy('id', 'desc')->get();
-    }
-
-    function deleteEmployee(request $request){
-        return User::where('id', $request->id)->delete();
-    }
-
     function editEmployee(request $request){
+        // dd($request);
         $this->validate($request, [
             'fullName' => 'required',
             'email' => "bail|required|email|unique:users,email,$request->id",
@@ -94,17 +91,46 @@ class AdminController extends Controller
             'email' => $request->email,
             'job_title' => $request->job_title,
             'contact' => $request->contact,
+            'userType' => $request->type,
         ];
         if (isset($request->password) && $request->password!="******" && !empty($request->password)) {
             $password = bcrypt($request->password);
             $data['password'] = $password;
         }
+
         $user = User::where('id', $request->id)->update($data);
-        return $user;
+        return User::all();
     }
 
-    function getEmployees(){
-        return User::where('userType','employee')->orderBy('id', 'desc')->get();
+    function getSalesForce(request $request, $email){
+        $client = new \GuzzleHttp\Client();
+
+        $email = urlencode($email);
+
+        $newresponse = $client->request('GET','https://ioptime-pvt-ltd-dev-ed.my.salesforce.com/services/data/v50.0/query/?q=select+id%2C+Start_date__c%2C+End_date__c%2C+Description%2C+Number_Of_Days__c+from+Case+where+status%3D%27Approved%27+and+contact.email+%3D+%27'.$email.'%27',
+            [
+                'headers'=>[
+                    'Content-Type'=>'application/x-www-form-urlencoded',
+                    'Authorization' => 'Bearer 00D6F000001osey!AQ8AQFK.hqSlWIdpg0aHqEp66BBrXjQi3VXTf_mB53lUF01KMxmL1Wl9W9Y_unSBd8eaFuK05a5RX9i8K0IWMVeCVKKaol61'
+                ]
+            ]
+
+        )->getBody()->getContents();
+
+        return response()->json($newresponse, 200);
+
+    }
+
+    function salesForceResponse(request $request){
+        dd($request);
+    }
+
+    function deleteEmployee(request $request){
+        return User::where('id', $request->id)->delete();
+    }
+
+    function getCategory(){
+        return Category::orderBy('id', 'desc')->get();
     }
 
     function adminLogin(request $request){

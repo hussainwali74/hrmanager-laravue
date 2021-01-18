@@ -6,27 +6,33 @@ import Vuex from 'vuex';
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-    state :{
-        counter : 1000,
-        user:false
+    state: {
+        counter: 1000,
+        user: false
     },
-    getters:{
-        getCounter(state){
+    getters: {
+        getCounter(state) {
             return state;
         },
-    },
-    mutations:{
-        changeTheCounter(state,data){
-            state.counter+=data
-
+        getEmail(state) {
+            return state.user.email;
         },
-        updateUser(state,user){
-           state.user=user
+        getUser(state) {
+            return state.user;
         }
     },
-    actions:{
-        changeCounterAction({commit},data){
-            commit('changeTheCounter',data)
+    mutations: {
+        changeTheCounter(state, data) {
+            state.counter += data
+
+        },
+        updateUser(state, user) {
+            state.user = user
+        }
+    },
+    actions: {
+        changeCounterAction({ commit }, data) {
+            commit('changeTheCounter', data)
         }
     }
 })

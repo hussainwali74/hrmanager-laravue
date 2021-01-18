@@ -3,25 +3,31 @@
         <div class="content">
             <div class="container">
                 <div class=" _box_shadow _border_radious _mar_b30 _p20">
-                    <div class="login-header"><h1>Reset Password</h1></div>
+                    <form v-on:submit.prevent="resetPassword">
+                        <div class="login-header"><h1>Reset Password</h1></div>
+                        <div class="space">
+                            <!-- <Input v-model="data.oldPassword"  type="password" placeholder="Old Password" /> -->
+                            <input type="password" v-model="data.oldPassword" class="form-control"   placeholder="Old Password">
+                        </div>
+                        <hr>
+                        <div class="space">
+                            <input type="password" v-model="data.password" class="form-control"   placeholder="Password">
+                            <!-- <Input v-model="data.password"  type="password" placeholder="New Password" /> -->
+                        </div>
 
-                <div class="space">
-                    <Input v-model="data.oldPassword"  type="password" placeholder="Old Password" />
-                </div>
-                <hr>
-                <div class="space">
-                    <Input v-model="data.password"  type="password" placeholder="New Password" />
-                </div>
+                        <div class="space">
+                            <!-- <Input v-model="data.confirmPassword"  type="password" placeholder="Confirm New Password" /> -->
+                            <input type="password" v-model="data.confirmPassword" class="form-control"   placeholder="Confirm New Password">
+                        </div>
+                        <div class="login-footer">
+                            <!-- <Button @click="resetPassword" type="primary" :disabled="updating" :loading="updating">{{ updating ? 'Updating..' : 'Update'}}</Button> -->
+                        <button class="btn btn-info btn-sm" type="submit" :disabled="updating" :loading="updating">{{ updating ? 'Updating..' : 'Update'}}</button>
 
-                <div class="space">
-                    <Input v-model="data.confirmPassword"  type="password" placeholder="Confirm New Password" />
-                </div>
-                <div class="login-footer">
-                    <Button @click="resetPassword" type="primary" :disabled="updating" :loading="updating">{{ updating ? 'Updating..' : 'Update'}}</Button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </template>
 

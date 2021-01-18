@@ -11,7 +11,7 @@
                         <input type="password" v-model="data.password" class="form-control"   placeholder="Password">
                     </div>
                     <div class="login-footer">
-                             <button class="btn btn-info btn-sm" type="submit">Login</button>
+                        <button class="btn btn-info btn-sm" type="submit">Login</button>
                     </div>
                 </form>
             </div>

@@ -25,10 +25,10 @@ const routes = [
         path: '/addvacation',
         component: addVacation,
     },
-    // {
-    //     path: '/myvacationslist',
-    //     component: vacationsList
-    // },
+    {
+        path: '/vacationslist',
+        component: vacationsList
+    },
     {
         path: '/password-reset',
         component: passwordReset

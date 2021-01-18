@@ -188,14 +188,14 @@ SELF HOSTED FONTS
 }
 @font-face {
     font-family: "HK Grotesk";
-    src: url("/static/fonts/hk-grotesk/HKGrotesk-Regular.woff2") format("woff2"),
+    src: url("../fonts/hk-grotesk/HKGrotesk-Regular.woff2") format("woff2"),
         url("../fonts/hk-grotesk/HKGrotesk-Regular.woff") format("woff");
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: "HK Grotesk";
-    src: url("/static/fonts/hk-grotesk/HKGrotesk-Medium.woff2") format("woff2"),
+    src: url("../fonts/hk-grotesk/HKGrotesk-Medium.woff2") format("woff2"),
         url("../fonts/hk-grotesk/HKGrotesk-Medium.woff") format("woff");
     font-weight: 500;
     font-style: normal;
@@ -528,7 +528,7 @@ textarea {
     padding: 13px 0 0 0px;
     border-left: 1px solid #ececec;
 }
-/* 
+/*
 CUSTOM CLASSES
 ==========================================================================
 */
@@ -550,7 +550,7 @@ CUSTOM CLASSES
 .pl-5 {
     padding-left: 2.5rem;
 }
-/* 
+/*
 END CUSTOM CLASSES
 ==========================================================================
 */
